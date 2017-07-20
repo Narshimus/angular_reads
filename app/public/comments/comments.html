@@ -1,0 +1,33 @@
+<a ng-click="showComments=!showComments">
+  <ng-pluralize count="$ctrl.post.comments.length" when="{'0': '0 Comments', 'one': '1 Comment', 'other': '{} Comments'}"></ng-pluralize>
+</a>
+
+<div class="row">
+  <div class="col-md-offset-1">
+    <hr>
+    <div ng-if="showComments">
+      <p ng-repeat="comment in $ctrl.post.comments" ng-mouseenter="$ctrl.hover(comment)" ng-mouseleave="$ctrl.hover(comment)">
+        {{comment.content}}
+        <!-- <a ng-if="comment.showButtons" ng-click="$ctrl.copyComment(comment)"><i class="glyphicon glyphicon-pencil"></i></a> -->
+        <a ng-if="comment.showButtons" ng-click="$ctrl.deleteComment(comment)"><i class="glyphicon glyphicon-remove-circle"></i></a>
+        <!-- <br>
+        <form ng-submit="$ctrl.editComment()" class="form-inline">
+          <div class="form-group">
+            <input ng-if="$ctrl.editComment" ng-model="$ctrl.newComment.content" class="form-control">
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-primary">
+          </div>
+        </form> -->
+      </p>
+      <form ng-submit="$ctrl.createComment()" class="form-inline">
+        <div class="form-group">
+          <input ng-model="$ctrl.newComment.content" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

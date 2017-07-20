@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-8">
+    <form name="form" novalidate ng-submit="$ctrl.editPost()">
+      <div ng-class="{'form-group': true, 'has-error': form.title.$invalid && form.title.$touched }">
+        <label for="title">Title</label>
+        <input class="form-control" name="title" required ng-model="$ctrl.edit.title">
+      </div>
+      <div ng-class="{'form-group': true, 'has-error': form.body.$invalid && form.body.$touched }">
+        <label>Body</label>
+        <textarea class="form-control" name="body" required ng-model="$ctrl.edit.body"></textarea>
+      </div>
+      <div ng-class="{'form-group': true, 'has-error': form.author.$invalid && form.author.$touched }">
+        <label>Author</label>
+        <input class="form-control" name="author" required ng-model="$ctrl.edit.author">
+      </div>
+      <div ng-class="{'form-group': true, 'has-error': form.image_url.$invalid && form.image_url.$touched }">
+        <label>Image URL</label>
+        <input class="form-control" name="image_url" required ng-model="$ctrl.edit.image_url">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+        Update
+      </button>
+        <button ng-click="$ctrl.cancelEdit()" type="button" class="btn btn-primary">
+        Cancel
+      </button>
+      </div>
+    </form>
+  </div>
+</div>

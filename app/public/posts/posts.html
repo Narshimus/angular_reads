@@ -1,0 +1,51 @@
+<div class="pull-right">
+  <p><a ng-click="$ctrl.addingPost = !$ctrl.addingPost" class="btn btn-info">New Post</a></p>
+</div>
+
+<ul class="nav nav-pills">
+  <li role="presentation" class="active">
+    <input type="search" class="form-control input-sm search-form" placeholder="Filter" ng-model="search">
+  </li>
+  <li class="dropdown" ng-init="sort='-vote_count'; sortName='Votes'">
+    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By {{sortName}}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a ng-click="sort='-vote_count'; sortName='Votes';">Votes</a></li>
+      <li><a ng-click="sort='created_at'; sortName='Date';">Date</a></li>
+      <li><a ng-click="sort='title'; sortName='Title'">Title</a></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="row" ng-if="$ctrl.addingPost">
+  <div class="col-md-8">
+    <form name="form" novalidate ng-submit="$ctrl.createPost(); $ctrl.addingPost = !$ctrl.addingPost">
+      <div ng-class="{'form-group': true, 'has-error': form.title.$invalid && form.title.$touched }">
+        <label for="title">Title</label>
+        <input class="form-control" name="title" required ng-model="$ctrl.post.title">
+      </div>
+      <div ng-class="{'form-group': true, 'has-error': form.body.$invalid && form.body.$touched }">
+        <label>Body</label>
+        <textarea class="form-control" name="body" required ng-model="$ctrl.post.body"></textarea>
+      </div>
+      <div ng-class="{'form-group': true, 'has-error': form.author.$invalid && form.author.$touched }">
+        <label>Author</label>
+        <input class="form-control" name="author" required ng-model="$ctrl.post.author">
+      </div>
+      <div ng-class="{'form-group': true, 'has-error': form.image_url.$invalid && form.image_url.$touched }">
+        <label>Image URL</label>
+        <input class="form-control" name="image_url" required ng-model="$ctrl.post.image_url">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+          Create Post
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <single ng-repeat="post in $ctrl.posts | filter:search | orderBy:sort" post="post"></single>
+  </div>
+</div>
